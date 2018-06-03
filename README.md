@@ -2,7 +2,7 @@
 
 
 <h3>
- <p align="center">Sistema de processo seletivo da TranspoBrasil de Santa Catarina..</p>
+ <p align="center">Seletivo da TranspoBrasil de Santa Catarina..</p>
 </h3>
 
 
