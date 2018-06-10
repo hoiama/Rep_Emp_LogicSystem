@@ -1,9 +1,4 @@
-<h2><p align="center"> Seletivo_TranspoBrasil (90% concluído)</p></h2>
-
-
-<h3>
- <p align="center">Seletivo da TranspoBrasil de Santa Catarina..</p>
-</h3>
+<h2><p align="center"> Sistema de lógicas.</p></h2>
 
 
 TECNOLOGIAS:
@@ -14,19 +9,25 @@ TECNOLOGIAS:
 	- SGDB PostgresSQL
 	- Servidor Tomcat 9
 	- Maven
+
+<div>
  
-
+	Tabela dinâmica com lançamentos
  <p align="center"><img src="TranspoBrasil/PrintScreen/screen0.png" width="950"/></p>
-
+	
+	Cadastrar um lançamento contendo os itens desejados
  <p align="center"><img src="TranspoBrasil/PrintScreen/screen1.png" width="950"/></p>
 
+	Cadastrar Itens e mostra-los em tabela dinâmica
  <p align="center"><img src="TranspoBrasil/PrintScreen/screen2.png" width="950"/></p>
 
+	Detectar se existe interseção entre dois intervalos Ex: 3-6 e 2-10
  <p align="center"><img src="TranspoBrasil/PrintScreen/screen3.png" width="950"/></p>
 
+	Detectar números primos entre um intervalo A-B
  <p align="center"><img src="TranspoBrasil/PrintScreen/screen4.png" width="950"/></p>
 
-
+</div>
 
 
 <p align="justify">
@@ -82,7 +83,10 @@ FALTA CONCLUIR:
 
 OBSERVAÇÕES
 
-	Projeto em desenvolvimento.
+	Projeto em desenvolvimento(90% concluído).
+	Baixa prioridade
+	Previsão Indefinida.
+	
 
 </p>
 
