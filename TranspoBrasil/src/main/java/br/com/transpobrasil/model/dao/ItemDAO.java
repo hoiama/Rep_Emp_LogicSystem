@@ -6,9 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import br.com.transpobrasil.model.entity.Item;
 
-
 public class ItemDAO extends DAO {
-
 
 	public void save(Item itemOb) {
 		EntityManager em = getEm();
@@ -22,8 +20,6 @@ public class ItemDAO extends DAO {
 		}
 	}
 
-	
-	
 	public void editarItem(Item item) {
 		EntityManager em = getEm();
 		try {
@@ -38,8 +34,6 @@ public class ItemDAO extends DAO {
 		em.close();
 	}
 
-	
-	
 	public void delete(int id) {
 		EntityManager em = getEm();
 		try {
@@ -52,15 +46,13 @@ public class ItemDAO extends DAO {
 		}
 		em.close();
 	}
-	
-	
-	
-	public List<Item> BuscarListaItens(){
+
+	public List<Item> BuscarListaItens() {
 		EntityManager em = getEm();
 		em.getTransaction().begin();
 		String queryJPQL = "select I from Item I";
 		Query query = em.createQuery(queryJPQL);
-		List<Item> lista = query.getResultList();	
+		List<Item> lista = query.getResultList();
 		em.close();
 		return lista;
 	}

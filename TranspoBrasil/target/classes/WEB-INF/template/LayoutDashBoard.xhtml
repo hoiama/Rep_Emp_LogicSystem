@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:p="http://primefaces.org/ui"	
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="layoutDashBoard.css"/>
+		<ui:insert name="css"></ui:insert>
+		<title> <ui:insert name="title"> Pandora Project  </ui:insert> </title>
+	</h:head>
+	
+	<h:body>
+			<header id="header">
+				<ui:insert name="header">
+					<div id="imagem-logo">
+						<h:graphicImage library="imagens"  name="logoMedio2.png" height="40px"/>
+					</div>
+				</ui:insert>
+			</header>
+		
+			<div id="body">
+				<ui:insert name="body">
+					Preencha o Corpo
+				</ui:insert>
+			</div>
+		
+			<footer id="footer">
+				<ui:insert name="footer">
+					Preencha o pé
+				</ui:insert>
+			</footer>	
+	</h:body>
+</html>

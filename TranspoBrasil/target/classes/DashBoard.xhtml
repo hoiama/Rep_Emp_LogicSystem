@@ -1,0 +1,241 @@
+<ui:composition 
+	template="WEB-INF/template/LayoutDashBoard.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<ui:define name="css">
+			<h:outputStylesheet library="css" name="DashBoard.css" />
+		</ui:define>
+		<title>Projeto Pandora Project</title>
+	</head>
+
+	<body>
+		<ui:define name="body">	
+			<div class="div-000">		
+				<p:tabView id="tabView" styleClass="tabview-001">
+				<p:ajax event="tabChange" listener="#{DashBoardBean.BuscarListaItens}" 
+				update="form-item form-lancamento form-filtro" />		
+				
+					<p:tab title="GASTOS">
+						<h:form id="form-item">
+							<div class="div-001">			
+								<h:panelGrid columns="2" styleClass="panelgrid-001"  >
+									<f:facet name="header"><h1>ITEM</h1></f:facet>
+									
+									<p:outputLabel value="Descrição: " for="descricaoItem" rendered="true"/>
+									<p:inputTextarea id="descricaoItem" value="#{DashBoardBean.itemOb.descricao}"/>
+	
+									<p:outputLabel value="Valor: " for="valorItem"/>
+									<p:inputNumber id="valorItem" value="#{DashBoardBean.itemOb.valor}"
+									symbol="R$" decimalSeparator=","  /> 
+									
+									<f:facet name="footer" >
+										<p:commandButton value="Salvar" action="#{DashBoardBean.saveItem}" 
+										update="form-item" />
+									</f:facet>
+								</h:panelGrid>
+							
+								<p:dataTable id="datatable-item" scrollable="true" scrollHeight="180"
+									value="#{DashBoardBean.listaItens}" var="item" rowKey="#{item.oid}"
+									selection="#{DashBoardBean.itensSelecionados}" editable="true"
+									sortBy="#{item.oid}" styleClass="datatable-001" sortOrder="descending">
+									
+									<f:facet name="header"><h1>ITENS CADASTRADOS</h1></f:facet>
+									
+									<p:column selectionMode="multiple" style="width:20px;text-align:center"/>
+									<p:ajax event="rowEdit" listener="#{DashBoardBean.editarItem}" update="datatable-item" />
+								
+									<p:column headerText="OID" style="width:30px">
+										<h:outputText value="#{item.oid}"/>			
+									</p:column>
+										
+									<p:column headerText="VALOR" style="width:50px" >
+										<p:cellEditor>
+											<f:facet name="output"><h:outputText value="#{item.valor}"/></f:facet>
+											<f:facet name="input"><h:inputText value="#{item.valor}" /></f:facet>	
+										</p:cellEditor>
+									</p:column>
+									
+									<p:column headerText="DESCRIÇÂO">
+										<h:outputText value="#{item.descricao}"/>
+									</p:column>
+									
+									<p:column style="width:40px; background-color:#ebebeb;">
+							           <p:rowEditor />
+							       </p:column>
+								</p:dataTable>	
+							</div>
+						</h:form>
+					</p:tab>
+					<p:tab title="LANÇAMENTO">
+						<h:form id="form-lancamento">	
+							<div class="div-001">
+								<p:panelGrid columns="2" styleClass="panelgrid-001">
+									<f:facet name="header"> 
+										<h1>LANÇAMETOS</h1> 
+									</f:facet>
+									
+									<p:outputLabel value="Data inicial"/>
+									<p:calendar  value="#{DashBoardBean.lancamentoOb.dt_inicial}"/>
+									
+									<p:outputLabel value="Data Final"/>
+									<p:calendar  value="#{DashBoardBean.lancamentoOb.dt_final}" pattern="yyyy-MM-dd" mask="true"/>
+									
+									<p:outputLabel value="Observação"/>
+									<p:inputTextarea value="#{DashBoardBean.lancamentoOb.observacao}"/>
+									
+									<f:facet name="footer">
+							            <p:commandButton process="@form" icon="ui-icon-search" value="Enviar"
+							             action="#{DashBoardBean.saveLancamento}" update="@form:form-lancamento"/>
+							        </f:facet>	
+								</p:panelGrid>	
+	
+								<p:dataTable id="checkboxDT" var="item" value="#{DashBoardBean.listaItens}" scrollable="true"
+								 selection="#{DashBoardBean.listaSelecionados}" rowKey="#{item.oid}" style="margin-bottom:0"
+								 scrollHeight="160" styleClass="datatable-001">
+
+							 		<f:facet name="header">
+							 			<h1>ITENS REGISTRADOS</h1>
+							 		</f:facet>
+							        
+							        <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+							        
+							        <p:column headerText="OID">
+							            <h:outputText value="#{item.oid}" />
+							        </p:column>
+							        
+							        <p:column headerText="DESCRIÇÃO">
+							            <h:outputText value="#{item.descricao}" />
+							        </p:column>
+							        
+							        <p:column headerText="VALOR">
+							            <h:outputText value="#{item.valor}" />
+							        </p:column>
+							          
+							        <f:facet name="footer">
+										<h1> Total: <p:outputLabel value="#{DashBoardBean.valorTotal}"/></h1>
+									</f:facet>
+						   	 	</p:dataTable>
+							</div>	
+						</h:form>
+					</p:tab>
+					
+					<p:tab title="INTERSEÇÃO">		
+						<h:form id="form-intersecao">
+							<div class="div-001">
+								<p:panelGrid columns="3" styleClass="panelgrid-001">
+									<p:outputLabel value="Faixa 1:"/>
+									<p:inputText size="8" value="#{DashBoardBean.listaIntervalo[0]}" required="true"/>
+									<p:inputText size="8" value="#{DashBoardBean.listaIntervalo[1]}" required="true"/>
+									
+									<p:outputLabel value="Faixa 2"/>
+									<p:inputText size="8" value="#{DashBoardBean.listaIntervalo[2]}" required="true"/>
+									<p:inputText size="8" value="#{DashBoardBean.listaIntervalo[3]}" required="true"/>
+										
+									<f:facet name="footer">
+										<h2>
+											<h:outputText value="Nos Interlados: #{DashBoardBean.listaIntervalo[0]} -
+											#{DashBoardBean.listaIntervalo[1]} e #{DashBoardBean.listaIntervalo[2]} -
+											#{DashBoardBean.listaIntervalo[3]} : #{DashBoardBean.respostaIntersecao}"/>
+										</h2>
+									</f:facet>
+									
+									<p:commandButton value="Consultar" action="#{DashBoardBean.intersecao}"
+									update="@form:form-intersecao"/>
+								</p:panelGrid>
+							</div>
+						</h:form>
+					</p:tab>
+					<p:tab title="PRIMOS">		
+						<h:form id="form-primos">
+							<div class="div-001">
+								<p:panelGrid columns="2" styleClass="panelgrid-001">
+									<p:outputLabel value="Valor Inicial:"/>
+									<p:inputText size="8" value="#{DashBoardBean.listaPrimos[0]}" required="true"/>
+						
+									<p:outputLabel value="Valor Final:"/>
+									<p:inputText size="8" value="#{DashBoardBean.listaPrimos[1]}" required="true"/>
+										
+									<p:commandButton value="Consultar Primos" action="#{DashBoardBean.verificaPrimos}" 
+									update="@form:form-primos"/>
+									
+									<f:facet name="footer">
+									</f:facet>
+								</p:panelGrid>
+							
+								<p:dataTable id="primos" var="primo" value="#{DashBoardBean.numerosPrimos}"
+								scrollable="true"  style="margin-bottom:0" scrollHeight="140" 
+								styleClass="datatable-001">
+
+								 	<f:facet name="header">
+								 	 <h1> PRIMOS </h1> 
+								 	</f:facet>
+								        
+								    <p:column >
+								       <h:outputText value="#{primo}" />
+								    </p:column>
+								</p:dataTable>
+							</div>
+						</h:form>
+					</p:tab>
+					<p:tab title="FILTRO LANÇADOS">
+						<div class="div-form-panelgrid">
+							<h:form id="form-filtro">
+								<div class="div-001">
+									<p:dataTable id="lancamentos-datatable" styleClass="datatable-002"
+									value="#{DashBoardBean.listaLancamentos}" var="varLancamento"
+									emptyMessage="Valor Não encontrado" scrollHeight="380" scrollable="true">
+
+							 		<f:facet name="header">
+							            <p:outputPanel>
+							                <h:outputText value="Pesquisa Geral:" />
+							                <p:inputText id="globalFilter"  style="width:150px" 
+							                placeholder="Enter keyword"/>
+							            </p:outputPanel>
+							        </f:facet>
+							        
+							        <p:column headerText="OID"  filterMatchMode="contains"
+							        filterBy="#{varLancamento.oid}" styleClass="h2"
+							        footerText="Contem">
+							            <h:outputText value="#{varLancamento.oid}" />
+							        </p:column>
+							        
+							        <p:column headerText="DATA INICIAL" filterMatchMode="exact"
+							        filterBy="#{varLancamento.dt_inicial}" styleClass="h2">
+							             <h:outputText value="#{varLancamento.dt_inicial}"/>
+							        </p:column>
+							        
+							        <p:column headerText="DATA FINAL" filterMatchMode="contains"
+							        filterBy="#{varLancamento.dt_final}" styleClass="h2">
+							            <h:outputText value="#{varLancamento.dt_final}" />
+							        </p:column>
+							          
+							        <p:column headerText="VALOR TOTAL" filterMatchMode="gte"
+							        filterBy="#{varLancamento.vl_total}" styleClass="h2">
+							         	<h:outputText value="#{varLancamento.vl_total}"/>
+							        </p:column>
+							         
+							        <p:column headerText="OBSERVAÇÃO" filterMatchMode="startsWith"
+							        filterBy="#{varLancamento.observacao}" styleClass="h2">
+							          	<h:outputText value="#{varLancamento.observacao}"/>
+							        </p:column>
+							          
+							        <f:facet name="footer">
+										
+									</f:facet>
+						        
+						   	 	</p:dataTable>
+								</div>
+							</h:form>
+						</div>
+					</p:tab>
+				</p:tabView>
+			</div>	
+		</ui:define>
+	</body>
+</ui:composition>

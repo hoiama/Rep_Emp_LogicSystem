@@ -17,7 +17,6 @@ import br.com.transpobrasil.model.entity.Lancamento;
 @ViewScoped
 public class DashBoardBean  implements Serializable{
 
-	
 	private static final long serialVersionUID = 1L;
 	private double valorTotal;
 	private String respostaIntersecao;
@@ -31,11 +30,9 @@ public class DashBoardBean  implements Serializable{
 	private List<Lancamento> listaLancamentos;
 	private List<Lancamento> listaTesteLancamento;
 	private List<Item> itensSelecionados;
+	
 	Controller serviceController = new Controller();
 	
-	
-	
-/*ITENS */
 	
 	/*Salva os Itens no banco */
 	public void saveItem() {
@@ -44,12 +41,10 @@ public class DashBoardBean  implements Serializable{
 	}
 	
 	
-	
 	/*Editar os Itens no banco */
 	public void editarItem (RowEditEvent event){ 
 		serviceController.editarItem(((Item) event.getObject()));
 	}
-	
 	
 	
 	/*Busca todos os os Itens no banco */
@@ -60,14 +55,9 @@ public class DashBoardBean  implements Serializable{
 	}
 
 	
-	
-	
-/*LANÇAMENTOS */
-	
 	public void saveLancamento() {
 		setValorTotal(serviceController.saveLancamento(lancamentoOb, listaSelecionados));
 	}
-	
 	
 	
 	/*Busca a lista de Lançamentos dos Itens no banco */
@@ -76,20 +66,11 @@ public class DashBoardBean  implements Serializable{
 	}
 
 	
-	
-	
-/* INTERSEÇÂO */
-	
 	public void intersecao(){
 		String resposta = serviceController.intersecao(listaIntervalo);
 		setRespostaIntersecao(resposta);
 	}
 	
-	
-
-	
-	
-/* NÚMEROS PRIMOS */
 	
 	public void verificaPrimos(){
 		setNumerosPrimos(serviceController.verificaPrimos(listaPrimos));
@@ -98,9 +79,6 @@ public class DashBoardBean  implements Serializable{
 	
 
 
-	
-/*GETTER AND SETTER */
-	
 	public Item getItemOb() {
 		return itemOb;
 	}
@@ -165,7 +143,6 @@ public class DashBoardBean  implements Serializable{
 		this.listaPrimos = listaPrimos;
 	}
 
-
 	public List<Lancamento> getListaLancamentos() {
 		return listaLancamentos;
 	}
@@ -175,11 +152,9 @@ public class DashBoardBean  implements Serializable{
 		this.listaLancamentos = listaLancamentos;
 	}
 
-
 	public List<Lancamento> getListaTesteLancamento() {
 		return listaTesteLancamento;
 	}
-
 
 	public void setListaTesteLancamento(List<Lancamento> listaTesteLancamento) {
 		this.listaTesteLancamento = listaTesteLancamento;
@@ -193,17 +168,11 @@ public class DashBoardBean  implements Serializable{
 		this.numerosPrimos = numerosPrimos;
 	}
 
-
-
 	public List<Item> getItensSelecionados() {
 		return itensSelecionados;
 	}
 
-
-
 	public void setItensSelecionados(List<Item> itensSelecionados) {
 		this.itensSelecionados = itensSelecionados;
 	}
-	
-
 }

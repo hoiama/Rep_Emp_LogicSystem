@@ -11,9 +11,9 @@ public class LancamentoDAO extends DAO {
 
 	
 	public void saveLancamento(Lancamento lancamentoOb, List<Item> itensSelecionados) {
-		
+
 		EntityManager em = getEm();
-		
+
 		try {
 			em.getTransaction().begin();
 			Lancamento lancamento = lancamentoOb;
@@ -21,29 +21,26 @@ public class LancamentoDAO extends DAO {
 			em.persist(lancamento);
 			em.getTransaction().commit();
 			em.close();
-			
+
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 		}
 	}
 
-
-
-	public List<Lancamento> BuscarListaLancamentos(){
+	
+	public List<Lancamento> BuscarListaLancamentos() {
 		EntityManager em = getEm();
 		em.getTransaction().begin();
 		String queryJPQL = "select I from Lancamento I";
 		Query query = em.createQuery(queryJPQL);
-		List<Lancamento> listaLancados = query.getResultList();	
+		List<Lancamento> listaLancados = query.getResultList();
 		em.close();
 		return listaLancados;
-		
 	}
 	
-	
-	
+
 	public void delete(int id) {
-		
+
 		EntityManager em = getEm();
 
 		try {
