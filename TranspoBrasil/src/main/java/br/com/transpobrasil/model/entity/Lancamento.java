@@ -77,8 +77,5 @@ public class Lancamento {
 	public void setItem(List<Item> item) {
 		this.item = item;
 	}
-	
-
-	/* HASHVODE */
 
 }

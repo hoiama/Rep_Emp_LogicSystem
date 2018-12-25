@@ -15,5 +15,4 @@ public class DAO {
 	public EntityManager getEm() {
 		return emf.createEntityManager();
 	}
-
 }

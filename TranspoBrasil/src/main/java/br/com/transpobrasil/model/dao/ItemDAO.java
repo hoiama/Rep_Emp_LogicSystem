@@ -56,5 +56,4 @@ public class ItemDAO extends DAO {
 		em.close();
 		return lista;
 	}
-
 }

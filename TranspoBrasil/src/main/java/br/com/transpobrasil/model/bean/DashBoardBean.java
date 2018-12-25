@@ -32,52 +32,51 @@ public class DashBoardBean  implements Serializable{
 	private List<Item> itensSelecionados;
 	
 	Controller serviceController = new Controller();
-	
-	
-	/*Salva os Itens no banco */
+
+	/**
+	 * Salva os Itens no banco
+	 */
 	public void saveItem() {
 		serviceController.saveItem(itemOb);
 		BuscarListaItens();
 	}
-	
-	
-	/*Editar os Itens no banco */
+
+	/**
+	 * Editar os Itens no banco
+	 * @param event
+	 */
 	public void editarItem (RowEditEvent event){ 
 		serviceController.editarItem(((Item) event.getObject()));
 	}
-	
-	
-	/*Busca todos os os Itens no banco */
+
+	/**
+	 * Busca todos os os Itens no banco
+	 */
 	public void BuscarListaItens() {
 		List<Item> listaRecebida = (serviceController.BuscarListaItens());
 		setListaItens(listaRecebida);
 		consultLancamentos();
 	}
 
-	
 	public void saveLancamento() {
 		setValorTotal(serviceController.saveLancamento(lancamentoOb, listaSelecionados));
 	}
-	
-	
-	/*Busca a lista de Lançamentos dos Itens no banco */
+
+	/**
+	 * Busca a lista de Lançamentos dos Itens no banco
+	 */
 	public void consultLancamentos() {	
 		setListaLancamentos(serviceController.consultLancamentos());
 	}
 
-	
 	public void intersecao(){
 		String resposta = serviceController.intersecao(listaIntervalo);
 		setRespostaIntersecao(resposta);
 	}
-	
-	
+
 	public void verificaPrimos(){
 		setNumerosPrimos(serviceController.verificaPrimos(listaPrimos));
 	}
-	
-	
-
 
 	public Item getItemOb() {
 		return itemOb;
@@ -146,7 +145,6 @@ public class DashBoardBean  implements Serializable{
 	public List<Lancamento> getListaLancamentos() {
 		return listaLancamentos;
 	}
-
 
 	public void setListaLancamentos(List<Lancamento> listaLancamentos) {
 		this.listaLancamentos = listaLancamentos;

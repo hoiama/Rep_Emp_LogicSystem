@@ -1,7 +1,7 @@
 package br.com.transpobrasil.controller;
 
 import java.util.List;
-import br.com.transpobrasil.controller.regras.RegrasNegocio;
+import br.com.transpobrasil.regras.RegrasNegocio;
 import br.com.transpobrasil.model.dao.ItemDAO;
 import br.com.transpobrasil.model.dao.LancamentoDAO;
 import br.com.transpobrasil.model.entity.Item;
@@ -13,7 +13,7 @@ public class Controller {
 	LancamentoDAO daoLancamento = new LancamentoDAO();
 	RegrasNegocio regras = new RegrasNegocio();
 
-	
+
 	/**
 	 * Salva os Itens no banco
 	 * @param itemOb
@@ -22,7 +22,7 @@ public class Controller {
 		ItemDAO.save(itemOb);
 	}
 
-	
+
 	/**
 	 * Editar os Itens no banco através de um ID
 	 * @param item
@@ -31,7 +31,7 @@ public class Controller {
 		ItemDAO.editarItem(item);
 	}
 
-	
+
 	/**
 	 * Busca todos os os Itens no banco
 	 * @return
@@ -41,7 +41,7 @@ public class Controller {
 		return lista;
 	}
 
-	
+
 	/**
 	 * Efetua Lançamento dos respectivos itens selecionados
 	 * @param lancamentoOb
@@ -52,7 +52,7 @@ public class Controller {
 		return regras.saveLancamento(lancamentoOb, itensSelecionados);
 	}
 
-	
+
 	/**
 	 * Busca a lista de Lançamentos dos Itens no banco
 	 * @return lista de lançamentos
@@ -61,17 +61,16 @@ public class Controller {
 		return daoLancamento.BuscarListaLancamentos();
 	}
 
-	
+
 	/**
 	 * Efetua uma consulta de interseção entre dois parâmetros
 	 * @return String da análise
 	 */
 	public String intersecao(Integer[] faixa) {
-		
 		return regras.analisarIntersecao(faixa);
 	}
 
-	
+
 	/**
 	 * Efetua uma consulta de números primos em um intervalo
 	 * @param listaPrimos é o intervalo de varredura

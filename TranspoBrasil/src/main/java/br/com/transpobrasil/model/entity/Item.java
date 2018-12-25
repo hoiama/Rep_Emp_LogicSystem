@@ -13,7 +13,6 @@ public class Item {
 	private int oid;
 	private String descricao;
 	private double valor;
-
 	
 	public int getOid() {
 		return this.oid;
